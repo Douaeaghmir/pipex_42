@@ -29,7 +29,7 @@ void free_array(char **arr)
 {
     int i = 0;
     if(!arr)
-    return;
+        return;
     while(arr[i])
     {
         free(arr[i]);
@@ -38,24 +38,24 @@ void free_array(char **arr)
     free(arr);
 }
 
-int open_file(char *file,int fd)
+int	file_opener(char *file, int io)
 {
-    int f;
-    if(fd == 0)
-    {
-        if(access(file, F_OK) != 0)
-        {
-            ft_putstr_fd("No such file or directory", 2);
-            f = -1;
-        }
-        else
-        f = open(file, O_RDONLY| 0777); 
-    }
-    if(fd == 1)
-    {
-        f = open(file, O_CREAT | O_RDWR | O_TRUNC , 0777 );
-    }
-    return(f);
+	int	x;
+
+	if (!file)
+		return (-1);
+	if (io == 0)
+	{
+		if (access(file, F_OK) != 0)
+			ft_putstr_fd("no such file pr directory",2);
+		else
+			x = open(file, O_RDONLY, 0777);
+	}
+	if (io == 1)
+		x = open(file, O_RDWR | O_CREAT | O_TRUNC, 0777);
+	if (x == -1)
+		exit(EXIT_FAILURE);
+	return (x);
 }
 void exe_cmd(char *arg, char **env)
 {
@@ -63,7 +63,7 @@ void exe_cmd(char *arg, char **env)
     char *path;
     if(!env)
         return;
-    cmd = ft_split(arg, ' ');
+    cmd = ft_split(arg, ' '); // split failed ""
     path = get_path(cmd[0],env);
     if(!path)
     {
@@ -71,5 +71,7 @@ void exe_cmd(char *arg, char **env)
         error();
     }
     if(execve(path, cmd, env) == -1)
+    {
         error();
+    }
 }

@@ -1,5 +1,4 @@
 #include "pipex.h"
-# define fork() (-1)
 
 static void child(int *pfd, char **av, char **env)
 {
@@ -8,7 +7,7 @@ static void child(int *pfd, char **av, char **env)
         return;
     close(pfd[0]);
     // fd = open_file(av[1], 0);
-    fd = open(av[1], O_RDONLY);
+    fd = open(av[1], O_RDONLY, 0777);
     if (fd < 0)
     {   
         close(pfd[1]);
@@ -26,7 +25,7 @@ static void parent(int *pfd, char **av, char **env)
     if(!av || !env)
         return;
     close(pfd[1]);
-    fd = open(av[4], O_CREAT | O_RDWR | O_TRUNC);
+    fd = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0777);
     if(fd < 0)
     {
         close(pfd[0]);
