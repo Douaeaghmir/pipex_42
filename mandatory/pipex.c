@@ -10,6 +10,8 @@ static void child(int *pfd, char **av, char **env)
     fd = open(av[1], O_RDONLY, 0777);
     if (fd < 0)
     {   
+        puts("error");
+
         close(pfd[1]);
         exit(1);
     }
@@ -25,9 +27,10 @@ static void parent(int *pfd, char **av, char **env)
     if(!av || !env)
         return;
     close(pfd[1]);
-    fd = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0777);
+    fd = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
     if(fd < 0)
     {
+        puts("error");
         close(pfd[0]);
         exit(1);
     }
@@ -71,5 +74,4 @@ int main(int ac, char **av,char **env)
     close(fd_p[0]);
     wait(NULL);
     wait(NULL);
-
 }
