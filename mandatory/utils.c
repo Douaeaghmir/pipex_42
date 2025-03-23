@@ -23,6 +23,7 @@ char *get_path(char *cmd, char **env)
         i++;
     }
     free_array(pathet);
+    puts("errr\n");
     return(failed("command not found"), NULL);
 }
 void free_array(char **arr)
@@ -61,9 +62,15 @@ void exe_cmd(char *arg, char **env)
 {
     char **cmd;
     char *path;
+
     if(!env)
         return;
     cmd = ft_split(arg, ' '); // split failed ""
+    if (access(arg, X_OK) == 0)
+    {
+        execve(cmd[0], cmd, env);
+        return ;
+    }
     path = get_path(cmd[0],env);
     if(!path)
     {
