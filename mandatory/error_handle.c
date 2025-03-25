@@ -8,3 +8,7 @@ void error(void)
 {
     ft_putstr_fd("error", 2);
 }
+void ft_pp(voif)
+{
+return;
+}
