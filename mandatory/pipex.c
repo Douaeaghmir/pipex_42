@@ -21,7 +21,7 @@ static void child(int *pfd, char **av, char **env)
     close(pfd[1]);
     exe_cmd(av[2],env);
 }
-static void parent(int *pfd, char **av, char **env)
+static void child2(int *pfd, char **av, char **env)
 {
     int fd;
     if(!av || !env)
@@ -69,7 +69,7 @@ int main(int ac, char **av,char **env)
         exit(EXIT_FAILURE);
     }
     if(pid2 == 0)
-        parent(fd_p, av, env);
+        child2(fd_p, av, env);
     close(fd_p[1]);
     close(fd_p[0]);
     wait(NULL);
