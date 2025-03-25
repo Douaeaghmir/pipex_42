@@ -20,4 +20,6 @@ int open_file(char *file,int io);
 void free_array(char **arr);
 void exe_cmd(char *arg, char **env);
 char *get_path(char *cmd, char **env);
+void ft_notcomand(void);
+void ft_close(int *fd);
 #endif

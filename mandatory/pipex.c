@@ -46,28 +46,17 @@ int main(int ac, char **av,char **env)
     pid_t pid;
     pid_t pid2;
     if(ac != 5)
-    {
-        ft_putstr_fd("Usage: ./pipex [infile] [cmd1] [cmd2] [outfile]\n", 2);
-        exit(EXIT_FAILURE);
-    }
+        ft_notcomand();
     if(pipe(fd_p) == -1)
         exit(EXIT_FAILURE);
     pid = fork();
     if(pid == -1)
-    {
-        close(fd_p[0]);
-        close(fd_p[1]);
-        exit(EXIT_FAILURE);
-    }
+    ft_close(fd_p);
     if(pid == 0)
         child(fd_p, av, env);
     pid2 = fork();
     if(pid2 == -1)
-    {
-        close(fd_p[0]);
-        close(fd_p[1]);
-        exit(EXIT_FAILURE);
-    }
+    ft_close(fd_p);
     if(pid2 == 0)
         child2(fd_p, av, env);
     close(fd_p[1]);
