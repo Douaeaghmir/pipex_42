@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft_func.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: doaghmir <doaghmir@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/26 01:27:05 by doaghmir          #+#    #+#             */
+/*   Updated: 2025/03/26 01:31:02 by doaghmir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
+
 int	ft_strlen(const char *s)
 {
 	int	i;
@@ -37,6 +50,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	ptr[i + j] = '\0';
 	return (ptr);
 }
+
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
@@ -46,6 +60,7 @@ int	ft_strcmp(char *s1, char *s2)
 		i++;
 	return (s1[i] - s2[i]);
 }
+
 void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
@@ -59,6 +74,7 @@ void	ft_putstr_fd(char *s, int fd)
 		i++;
 	}
 }
+
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
